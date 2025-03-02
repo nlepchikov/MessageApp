@@ -1,0 +1,22 @@
+version: '3.4'
+
+services:
+  messageapp:
+    image: lepnik/mesageapp:dev
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
+    environment:
+      - ConnectionStrings__DefaultConnection=Host=localhost;Port=5432;Database=MessageService;Username=postgres;Password=58421
+  db:
+    image: postgres:latest
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 58421
+      POSTGRES_DB: MessageService
+    ports:
+      - "5432:5432"
